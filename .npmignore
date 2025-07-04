@@ -1,0 +1,45 @@
+# Source files
+src/
+examples/
+
+# Development files
+.github/
+.vscode/
+.idea/
+
+# Configuration files
+.eslintrc.js
+.prettierrc
+jest.config.js
+tsconfig.json
+
+# Documentation
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Test files
+**/*.test.ts
+**/*.spec.ts
+__tests__/
+coverage/
+
+# Build tools
+webpack.config.js
+rollup.config.js
+vite.config.js
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db 
