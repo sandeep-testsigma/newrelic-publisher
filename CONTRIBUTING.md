@@ -1,4 +1,4 @@
-# Contributing to Your Module Name
+# Contributing to newrelic-publisher
 
 Thank you for your interest in contributing to this project! This document provides guidelines and information for contributors.
 
@@ -41,7 +41,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 
 1. Clone your fork:
    ```bash
-   git clone https://github.com/yourusername/your-module-name.git
+   git clone https://github.com/sandeep-testsigma/your-module-name.git
    cd your-module-name
    ```
 
@@ -149,7 +149,7 @@ npm pack
 npm install ./your-module-name-1.0.0.tgz
 
 # Test Git installation (after pushing)
-npm install git+https://github.com/yourusername/your-module-name.git#your-branch
+npm install git+https://github.com/sandeep-testsigma/your-module-name.git#your-branch
 ```
 
 ## Questions?

@@ -1,6 +1,6 @@
-# Your Module Name
+# newrelic-publisher
 
-A brief description of what your module does and why it's useful.
+newrelic-publisher
 
 ## Features
 
@@ -13,7 +13,7 @@ A brief description of what your module does and why it's useful.
 Install directly from GitHub:
 
 ```bash
-npm install git+https://github.com/yourusername/your-module-name.git#v1.0.0
+npm install git+https://github.com/sandeep-testsigma/newrelic-publisher.git#v1.0.0
 ```
 
 Or add to your package.json:
@@ -21,7 +21,7 @@ Or add to your package.json:
 ```json
 {
   "dependencies": {
-    "your-module-name": "git+https://github.com/yourusername/your-module-name.git#v1.0.0"
+    "newrelic-publisher": "git+https://github.com/sandeep-testsigma/newrelic-publisher.git#v1.0.0"
   }
 }
 ```
@@ -29,7 +29,7 @@ Or add to your package.json:
 You can also install from a specific branch:
 
 ```bash
-npm install git+https://github.com/yourusername/your-module-name.git#main
+npm install git+https://github.com/sandeep-testsigma/newrelic-publisher.git#main
 ```
 
 ## Troubleshooting: GitHub Authentication Issues
@@ -47,7 +47,7 @@ git config --global url."git@github.com:".insteadOf "https://github.com/"
 Or use the SSH URL directly:
 
 ```bash
-npm install git+ssh://git@github.com/yourusername/your-module-name.git#v1.0.0
+npm install git+ssh://git@github.com/sandeep-testsigma/newrelic-publisher.git#v1.0.0
 ```
 
 ### 2. Use a Personal Access Token (HTTPS)
@@ -55,7 +55,7 @@ npm install git+ssh://git@github.com/yourusername/your-module-name.git#v1.0.0
 If you prefer HTTPS, create a [Personal Access Token](https://github.com/settings/tokens) and use it in the URL:
 
 ```bash
-npm install https://YOUR_TOKEN@github.com/yourusername/your-module-name.git#v1.0.0
+npm install https://YOUR_TOKEN@github.com/sandeep-testsigma/newrelic-publisher.git#v1.0.0
 ```
 
 ### 3. Configure npm to Use SSH for GitHub
@@ -80,7 +80,7 @@ If you see authentication errors, try the above solutions. For more help, see th
 ### Basic Usage
 
 ```typescript
-import { yourFunction } from 'your-module-name';
+import { yourFunction } from 'newrelic-publisher';
 
 const result = yourFunction('some input');
 console.log(result);
@@ -89,7 +89,7 @@ console.log(result);
 ### Advanced Usage
 
 ```typescript
-import { YourClass } from 'your-module-name';
+import { YourClass } from 'newrelic-publisher';
 
 const instance = new YourClass({
   option1: 'value1',
@@ -144,7 +144,7 @@ This module is distributed via GitHub releases. Each release includes:
 
 To use a specific version, reference the tag in your installation:
 ```bash
-npm install git+https://github.com/yourusername/your-module-name.git#v1.2.3
+npm install git+https://github.com/sandeep-testsigma/newrelic-publisher.git#v1.2.3
 ```
 
 ## Contributing
@@ -155,8 +155,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-module-name.git
-   cd your-module-name
+   git clone https://github.com/sandeep-testsigma/newrelic-publisher.git
+   cd newrelic-publisher
    ```
 
 2. Install dependencies:
@@ -212,9 +212,9 @@ See [CHANGELOG.md](CHANGELOG.md) for a list of changes between versions.
 
 If you encounter any issues or have questions, please:
 
-1. Check the [documentation](https://github.com/yourusername/your-module-name#readme)
-2. Search [existing issues](https://github.com/yourusername/your-module-name/issues)
-3. Create a [new issue](https://github.com/yourusername/your-module-name/issues/new)
+1. Check the [documentation](https://github.com/sandeep-testsigma/newrelic-publisher#readme)
+2. Search [existing issues](https://github.com/sandeep-testsigma/newrelic-publisher/issues)
+3. Create a [new issue](https://github.com/sandeep-testsigma/newrelic-publisher/issues/new)
 
 ## Acknowledgments
 

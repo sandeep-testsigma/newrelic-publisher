@@ -1,7 +1,7 @@
 {
-  "name": "your-module-name",
+  "name": "newrelic-publisher",
   "version": "1.0.2",
-  "description": "A brief description of your module",
+  "description": "newrelic-publisher",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -25,20 +25,18 @@
     "release": "npm run build && npm run test && npm run lint"
   },
   "keywords": [
-    "your",
-    "keywords",
-    "here"
+    ""
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Sandeep Kumar Yadav <sandeepkumar.yadav@testsigma.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/your-module-name.git"
+    "url": "git+https://github.com/sandeep-testsigma/newrelic-publisher.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/your-module-name/issues"
+    "url": "https://github.com/sandeep-testsigma/newrelic-publisher/issues"
   },
-  "homepage": "https://github.com/yourusername/your-module-name#readme",
+  "homepage": "https://github.com/sandeep-testsigma/newrelic-publisher#readme",
   "devDependencies": {
     "@types/jest": "^29.5.0",
     "@types/node": "^20.0.0",
