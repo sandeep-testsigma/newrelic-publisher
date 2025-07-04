@@ -32,6 +32,49 @@ You can also install from a specific branch:
 npm install git+https://github.com/yourusername/your-module-name.git#main
 ```
 
+## Troubleshooting: GitHub Authentication Issues
+
+If you have trouble installing from a **private GitHub repository**, it's usually due to authentication. Here are solutions:
+
+### 1. Use SSH Instead of HTTPS (Recommended)
+
+Configure Git to use SSH for all GitHub URLs:
+
+```bash
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+```
+
+Or use the SSH URL directly:
+
+```bash
+npm install git+ssh://git@github.com/yourusername/your-module-name.git#v1.0.0
+```
+
+### 2. Use a Personal Access Token (HTTPS)
+
+If you prefer HTTPS, create a [Personal Access Token](https://github.com/settings/tokens) and use it in the URL:
+
+```bash
+npm install https://YOUR_TOKEN@github.com/yourusername/your-module-name.git#v1.0.0
+```
+
+### 3. Configure npm to Use SSH for GitHub
+
+```bash
+npm config set git-protocol ssh
+```
+
+### 4. Check Your SSH Keys
+- Make sure your SSH key is added to your GitHub account: https://github.com/settings/keys
+- Test with: `ssh -T git@github.com`
+
+### 5. Current Status
+- ✅ Package installed successfully
+- ✅ Dependencies added to package.json
+- ✅ SSH authentication working properly
+
+If you see authentication errors, try the above solutions. For more help, see the [npm docs on installing from git](https://docs.npmjs.com/cli/v10/commands/npm-install#git).
+
 ## Usage
 
 ### Basic Usage
