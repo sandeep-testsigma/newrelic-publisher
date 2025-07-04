@@ -2,14 +2,24 @@
  * Type definitions for the module
  */
 
-export interface YourClassOptions {
-  option1: string;
-  option2: string;
-  optionalOption?: boolean;
+export interface NewRelicSourcemapPluginOptions {
+  isNewRelicEnabled?: boolean;
+  applicationId?: string;
+  apiKey?: string;
+  javascriptUrlBase?: string;
 }
 
-export interface ProcessResult {
+
+export type PublishSourcemapError = Error & {
+  response: {
+    body: {
+      code: number;
+    };
+  };
+};
+
+export type PublishSourcemapResponse = {
   success: boolean;
-  data: string;
-  timestamp: Date;
-} 
+  message: string;
+  data: unknown;
+};
