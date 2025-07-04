@@ -1,6 +1,6 @@
 {
   "name": "your-module-name",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A brief description of your module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -54,4 +54,4 @@
   "engines": {
     "node": ">=16.0.0"
   }
-} 
+}
