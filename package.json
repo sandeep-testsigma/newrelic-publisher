@@ -1,6 +1,6 @@
 {
   "name": "newrelic-publisher",
-  "version": "1.0.2",
+  "version": "0.0.1",
   "description": "newrelic-publisher",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
