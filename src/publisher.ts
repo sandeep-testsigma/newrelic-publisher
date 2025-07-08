@@ -11,6 +11,7 @@ interface NewRelicSourcemapPluginOptions {
   applicationId?: string;
   apiKey?: string;
   javascriptUrlBase?: string;
+  buildOutputDir?: string;
 }
 
 export const newRelicSourcemapPlugin = ({
@@ -19,6 +20,7 @@ export const newRelicSourcemapPlugin = ({
   applicationId = process.env['NEWRELIC_VITE_PLUGIN_APPLICATION_ID'],
   apiKey = process.env['NEWRELIC_VITE_PLUGIN_API_KEY'],
   javascriptUrlBase = process.env['NEWRELIC_VITE_PLUGIN_JAVASCRIPTURL_BASE'],
+  buildOutputDir = 'dist',
 }: NewRelicSourcemapPluginOptions) => {
   return {
     name: 'newrelic-sourcemap-publish-plugin',
@@ -36,7 +38,7 @@ export const newRelicSourcemapPlugin = ({
           }
 
           // Get the build output directory (usually 'dist' for Vite)
-          const buildDir = path.resolve(process.cwd(), 'dist');
+          const buildDir = path.resolve(process.cwd(), buildOutputDir);
 
           // Function to recursively find and upload .map files
           const uploadMapFiles = async (dir: string) => {

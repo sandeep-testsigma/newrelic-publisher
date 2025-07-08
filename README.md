@@ -4,9 +4,16 @@ newrelic-publisher
 
 ## Features
 
-- Feature 1: Description of the first feature
-- Feature 2: Description of the second feature
-- Feature 3: Description of the third feature
+- **Vite Plugin Integration**: Seamlessly integrates with Vite build process to automatically upload sourcemaps to New Relic after builds
+- **Automatic Sourcemap Discovery**: Recursively finds and uploads all `.map` files from your build directory
+- **Environment Variable Support**: Configure using environment variables for secure API key management
+- **Dry Run Mode**: Test your configuration without actually uploading sourcemaps
+- **Sourcemap Cleanup**: Automatically removes sourcemap files after successful upload to keep your production builds clean
+- **Error Handling**: Robust error handling with detailed logging and graceful failure recovery
+- **TypeScript Support**: Full TypeScript support with comprehensive type definitions
+- **Manual Upload API**: Utility function for manual sourcemap uploads outside of the build process
+- **Duplicate Detection**: Handles already-published sourcemaps gracefully without errors
+- **Flexible Configuration**: Support for custom build directories, JavaScript URL bases, and conditional enabling
 
 ## Installation
 
@@ -77,58 +84,186 @@ If you see authentication errors, try the above solutions. For more help, see th
 
 ## Usage
 
-### Basic Usage
+### Basic Usage - Vite Plugin
+
+The primary use case is as a Vite plugin to automatically upload sourcemaps to New Relic after build:
 
 ```typescript
-import { yourFunction } from 'newrelic-publisher';
+// vite.config.ts
+import { defineConfig } from 'vite';
+import { newRelicSourcemapPlugin } from 'newrelic-publisher';
 
-const result = yourFunction('some input');
-console.log(result);
+export default defineConfig({
+  plugins: [
+    newRelicSourcemapPlugin({
+      applicationId: 'your-newrelic-app-id',
+      apiKey: 'your-newrelic-api-key',
+      javascriptUrlBase: 'https://your-domain.com/assets',
+      buildOutputDir: 'dist', // optional, defaults to 'dist'
+      dryRun: false, // optional, set to true for testing
+      isNewRelicEnabled: true // optional, defaults to true
+    })
+  ],
+  // ... other config
+});
 ```
 
-### Advanced Usage
+### Environment Variables
+
+You can also configure the plugin using environment variables:
+
+```bash
+# .env file
+NEWRELIC_VITE_PLUGIN_APPLICATION_ID=your-newrelic-app-id
+NEWRELIC_VITE_PLUGIN_API_KEY=your-newrelic-api-key
+NEWRELIC_VITE_PLUGIN_JAVASCRIPTURL_BASE=https://your-domain.com/assets
+```
 
 ```typescript
-import { YourClass } from 'newrelic-publisher';
+// vite.config.ts - uses environment variables automatically
+import { newRelicSourcemapPlugin } from 'newrelic-publisher';
 
-const instance = new YourClass({
-  option1: 'value1',
-  option2: 'value2'
+export default defineConfig({
+  plugins: [
+    newRelicSourcemapPlugin({
+      // Will use environment variables if not specified
+    })
+  ]
 });
+```
 
-const result = await instance.process();
+### Manual Sourcemap Publishing
+
+For manual control or use outside of Vite, use the utility function:
+
+```typescript
+import { publishSourcemapAsync } from 'newrelic-publisher';
+
+async function uploadSourcemap() {
+  try {
+    const result = await publishSourcemapAsync({
+      applicationId: 'your-newrelic-app-id',
+      apiKey: 'your-newrelic-api-key',
+      sourcemapPath: './dist/assets/app.js.map',
+      javascriptUrl: 'https://your-domain.com/assets/app.js'
+    });
+    
+    console.log('Upload successful:', result);
+  } catch (error) {
+    console.error('Upload failed:', error);
+  }
+}
+```
+
+### TypeScript Support
+
+The package includes full TypeScript support with exported types:
+
+```typescript
+import type { 
+  NewRelicSourcemapPluginOptions,
+  PublishSourcemapError,
+  PublishSourcemapResponse 
+} from 'newrelic-publisher';
+
+const config: NewRelicSourcemapPluginOptions = {
+  applicationId: 'your-app-id',
+  apiKey: 'your-api-key',
+  javascriptUrlBase: 'https://your-domain.com',
+  dryRun: true
+};
 ```
 
 ## API Reference
 
-### `yourFunction(input: string): string`
+### `newRelicSourcemapPlugin(options: NewRelicSourcemapPluginOptions)`
 
-Processes the input string and returns a result.
+A Vite plugin that automatically uploads sourcemaps to New Relic after the build process.
 
 **Parameters:**
-- `input` (string): The input string to process
+- `options` (NewRelicSourcemapPluginOptions): Configuration options for the plugin
 
 **Returns:**
-- `string`: The processed result
+- Vite plugin object with `name` and `closeBundle` hook
 
 **Example:**
 ```typescript
-const result = yourFunction('hello world');
-// Returns: 'processed hello world'
+import { newRelicSourcemapPlugin } from 'newrelic-publisher';
+
+const plugin = newRelicSourcemapPlugin({
+  applicationId: 'your-app-id',
+  apiKey: 'your-api-key',
+  javascriptUrlBase: 'https://your-domain.com/assets'
+});
 ```
 
-### `YourClass`
+### `publishSourcemapAsync(options: NewRelicSourcemapPluginOptions): Promise<string | PublishSourcemapResponse>`
 
-A class that provides advanced functionality.
+Manually publishes a sourcemap to New Relic.
 
-**Constructor:**
+**Parameters:**
+- `options` (NewRelicSourcemapPluginOptions): Configuration options including sourcemap path and JavaScript URL
+
+**Returns:**
+- `Promise<string | PublishSourcemapResponse>`: Returns 'already published' if sourcemap exists, or response data on success
+
+**Throws:**
+- `PublishSourcemapError`: When upload fails
+
+**Example:**
 ```typescript
-new YourClass(options: YourClassOptions)
+const result = await publishSourcemapAsync({
+  applicationId: 'your-app-id',
+  apiKey: 'your-api-key',
+  sourcemapPath: './dist/app.js.map',
+  javascriptUrl: 'https://your-domain.com/app.js'
+});
 ```
 
-**Methods:**
-- `process(): Promise<string>` - Processes data asynchronously
-- `validate(): boolean` - Validates the current state
+### Types
+
+#### `NewRelicSourcemapPluginOptions`
+
+Configuration interface for the plugin and utility functions.
+
+```typescript
+interface NewRelicSourcemapPluginOptions {
+  isNewRelicEnabled?: boolean;     // Enable/disable New Relic integration
+  applicationId?: string;          // New Relic application ID
+  apiKey?: string;                // New Relic API key
+  javascriptUrlBase?: string;     // Base URL for JavaScript files
+  buildOutputDir?: string;        // Build output directory (plugin only)
+  dryRun?: boolean;              // Test mode without actual uploads (plugin only)
+  sourcemapPath?: string;        // Path to sourcemap file (manual upload only)
+  javascriptUrl?: string;        // Full URL to JavaScript file (manual upload only)
+}
+```
+
+#### `PublishSourcemapResponse`
+
+Response object returned on successful sourcemap upload.
+
+```typescript
+type PublishSourcemapResponse = {
+  success: boolean;
+  message: string;
+  data: unknown;
+};
+```
+
+#### `PublishSourcemapError`
+
+Error object thrown when sourcemap upload fails.
+
+```typescript
+type PublishSourcemapError = Error & {
+  response: {
+    body: {
+      code: number;
+    };
+  };
+};
+```
 
 ## Examples
 
